@@ -6,7 +6,6 @@ socket.on("connect", function () {
 });
 
 socket.on("update", function (data) {
-  console.log('update', data);
   if (tx.value !== data.value) {
     tx.value = data.value;
   }

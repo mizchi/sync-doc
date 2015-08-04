@@ -1,7 +1,4 @@
-# Hapi + socket.io Example
-> adding socket.io support to a hapi server
-
-This is an example of how to use socket.io with Hapi. The frontend is built with Ractive and Bootstrap. The application is a simple echo server; sending a "ping" to the server with some data will result in it being sent back to the client.
+# Sync doc
 
 ## Getting Started
 
@@ -12,7 +9,7 @@ This is an example of how to use socket.io with Hapi. The frontend is built with
 # License (BSD 2-Clause)
 
 ```
-Copyright (c) 2014, Fionn Kelleher
+Copyright (c) 2014, Fionn Kelleher, Koutaro Chikuba
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
