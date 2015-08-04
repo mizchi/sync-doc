@@ -1,41 +1,30 @@
-var Hapi = require("hapi")
-
-var app = Hapi.createServer(8080)
+var Hapi = require("hapi");
+var app = Hapi.createServer(8080);
 var io = require("socket.io")(app.listener)
 
-/*
-    handle socket.io connections
-*/
-
-var ioHandler = function (socket) {
-    socket.emit("welcome", {
-        message: "Hello from Hapi!",
-        version: Hapi.version
-    })
-
-    // simple echo service
-    var pingHandler = function(data) {
-        socket.emit("pong", data)
-    }
-
-    socket.on("ping", pingHandler)
-}
-
-io.on("connection", ioHandler)
-
-/*
-    serve our static files
-*/
+io.on("connection", function (socket) {
+  socket.emit("welcome", {
+    message: "Hello from Hapi!",
+    version: Hapi.version
+  });
+  socket.on("update", function(data) {
+    console.log('update:server');
+    io.sockets.emit('update',{
+      timestamp: data.timestamp,
+      value: data.value
+    });
+  });
+});
 
 app.route({
-    path: "/{static*}",
-    method: "GET",
-    handler: {
-        directory: {
-            path: "./static"
-        }
+  path: "/{static*}",
+  method: "GET",
+  handler: {
+    directory: {
+      path: "./static"
     }
-})
+  }
+});
 
 app.start(function () {
     console.log("socket.io example @", app.info.uri)
